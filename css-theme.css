@@ -1,0 +1,1069 @@
+/* =====================================================================
+   Minimal Glass & Music Theme for Jellyfin (10.10 – 12.4+)
+   Mobile-polished build
+   ===================================================================== */
+
+:root {
+  /* Accent */
+  --accent: #1d3f52;
+  --accent-hover: #244f66;
+  --accent-soft: rgba(29, 63, 82, 0.2);
+  --player-teal: #00a4dc;
+
+  /* Text */
+  --text-primary: #f5f5f7;
+  --text-secondary: rgba(245, 245, 247, 0.65);
+
+  /* Surfaces & glass */
+  --bg-base: #0a0a0e;
+  --surface: rgba(22, 22, 28, 0.68);
+  --surface-elevated: rgba(32, 32, 40, 0.82);
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  --blur: blur(24px) saturate(180%);
+  --pill-blur: blur(18px) saturate(160%);
+
+  /* Radii */
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+
+  /* Floating pill spacing, including the iPhone home-bar area */
+  --pill-gap: calc(18px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Touch screens: lighter blur keeps scrolling smooth */
+@media (pointer: coarse) {
+  :root {
+    --blur: blur(12px) saturate(160%);
+    --pill-blur: blur(10px) saturate(150%);
+  }
+}
+
+/* ---------- 1. Base canvas & typography ---------- */
+html,
+body,
+.skinBody,
+.backgroundContainer {
+  background-color: var(--bg-base) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+#reactRoot,
+.mainAnimatedPages,
+.page,
+.MuiBox-root main {
+  background: transparent !important;
+}
+
+body,
+.skinBody,
+h1, h2, h3,
+.itemName,
+.sectionTitle,
+.listItemBodyText,
+.MuiTypography-root {
+  color: var(--text-primary) !important;
+}
+
+.secondary,
+.listItemBodyText.secondary,
+.mediaInfoItem,
+.itemMiscInfo,
+.detailSectionContent,
+.MuiTypography-colorTextSecondary {
+  color: var(--text-secondary) !important;
+}
+
+a:not(.MuiButtonBase-root):not(.cardImageContainer),
+.cardText,
+.cardText a,
+.cardText-first,
+.cardFooter .itemAction {
+  color: #ffffff !important;
+  text-shadow:
+    0 0 8px rgba(0, 0, 0, 0.95),
+    0 2px 6px rgba(0, 0, 0, 0.9) !important;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+/* ---------- 2. Header & sidebar ---------- */
+.skinHeader,
+.skinHeader-withBackground,
+.skinHeader-blurred,
+.MuiAppBar-root {
+  background-color: rgba(10, 10, 14, 0.72) !important;
+  background-image: none !important;
+  -webkit-backdrop-filter: var(--blur) !important;
+  backdrop-filter: var(--blur) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  box-shadow: none !important;
+}
+
+.emby-tab-button,
+.MuiTab-root,
+.MuiAppBar-root .MuiButton-root {
+  border-radius: 999px !important;
+  text-transform: none !important;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.emby-tab-button-active,
+.MuiTab-root.Mui-selected,
+.MuiAppBar-root a[aria-current="page"] {
+  background: var(--surface-hover) !important;
+  color: #ffffff !important;
+}
+
+.MuiTabs-indicator {
+  display: none !important;
+}
+
+.mainDrawer,
+.MuiDrawer-paper {
+  background-color: var(--surface-elevated) !important;
+  -webkit-backdrop-filter: var(--blur) !important;
+  backdrop-filter: var(--blur) !important;
+  border-right: 1px solid var(--border-subtle) !important;
+}
+
+.navMenuOption,
+.MuiListItemButton-root {
+  border-radius: var(--radius-sm) !important;
+  margin: 2px 10px !important;
+}
+
+.navMenuOption-selected,
+.MuiListItemButton-root.Mui-selected {
+  background: var(--accent-soft) !important;
+  color: #ffffff !important;
+}
+
+/* ---------- 3. Dropdown menus ---------- */
+.MuiPopover-root .MuiPaper-root,
+.MuiPopover-paper.MuiMenu-paper,
+.actionSheet {
+  background-color: rgba(20, 20, 26, 0.42) !important;
+  background-image: none !important;
+  -webkit-backdrop-filter: var(--blur) !important;
+  backdrop-filter: var(--blur) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45) !important;
+}
+
+.MuiMenu-list,
+.MuiPopover-paper .MuiList-root {
+  background: transparent !important;
+  padding: 6px !important;
+}
+
+.MuiMenuItem-root,
+.actionSheetMenuItem {
+  border-radius: 10px !important;
+  margin: 2px 0 !important;
+  transition: background-color 0.15s ease;
+}
+
+.MuiPopover-root .MuiDivider-root {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  margin: 4px 8px !important;
+}
+
+/* ---------- 4. Login page ---------- */
+/* Shown only while visible, so it disappears after sign-in */
+#loginPage:not(.hide) {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 50% 15%, var(--accent-soft), transparent 55%),
+    var(--bg-base) !important;
+}
+
+#loginPage.hide {
+  display: none !important;
+}
+
+#loginPage .padded-left.padded-right.padded-bottom-page {
+  width: 100%;
+  max-width: 480px;
+  margin: 1.5rem;
+  padding: 2.25rem !important;
+  background: var(--surface) !important;
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+}
+
+#loginPage h1 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+
+#loginPage .button-submit,
+#loginPage .raised {
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.85rem 1.2rem !important;
+  font-weight: 600;
+}
+
+/* ---------- 5. Checkboxes ---------- */
+.checkboxOutline {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 6px !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.emby-checkbox:checked + span + .checkboxOutline {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+.checkboxIcon-checked {
+  color: #ffffff !important;
+}
+
+.checkboxLabel {
+  color: var(--text-primary) !important;
+  font-weight: 500;
+}
+
+.MuiCheckbox-root.Mui-checked,
+.MuiSwitch-switchBase.Mui-checked {
+  color: var(--accent) !important;
+}
+
+.MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+  background-color: var(--accent) !important;
+}
+
+/* ---------- 6. Cards & hover buttons ---------- */
+.cardScalable,
+.cardImageContainer,
+.cardContent,
+.cardOverlayContainer,
+.blurhash-canvas,
+.MuiCardMedia-root {
+  border-radius: var(--radius-md) !important;
+  overflow: hidden;
+}
+
+.cardScalable {
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.cardOverlayContainer {
+  background: rgba(10, 10, 14, 0.18) !important;
+}
+
+.cardOverlayButton,
+.cardOverlayFab-primary {
+  background: rgba(20, 20, 26, 0.28) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
+  backdrop-filter: blur(12px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.18s ease, background-color 0.18s ease !important;
+}
+
+.cardOverlayFab-primary {
+  width: 48px !important;
+  height: 48px !important;
+}
+
+.cardOverlayButton-br {
+  display: flex !important;
+  gap: 6px;
+  padding: 8px !important;
+}
+
+.cardOverlayButton-br .cardOverlayButton {
+  width: 32px !important;
+  height: 32px !important;
+  margin: 0 !important;
+}
+
+/* ---------- 7. Detail pages ---------- */
+.backgroundContainer.withBackdrop {
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 14, 0.25) 0%,
+    rgba(10, 10, 14, 0.82) 55%,
+    var(--bg-base) 100%
+  ) !important;
+}
+
+.backdropImage {
+  filter: saturate(115%) brightness(0.85);
+}
+
+.detailPagePrimaryContainer,
+.detailPageSecondaryContainer,
+.detailPagePrimaryContainer .infoWrapper,
+.detailSection.overview {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.detailImageContainer .cardScalable,
+.detailImageContainer .cardImageContainer {
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+}
+
+.itemName {
+  font-weight: 700 !important;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- 8. Music lists ---------- */
+.verticalSection-extrabottompadding .itemsContainer.vertical-list,
+.paperList {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.listItem,
+.listItem-border {
+  border: none !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 0.45rem 0.75rem !important;
+  margin-bottom: 2px;
+  transition: background-color 0.15s ease;
+}
+
+.listItemImage {
+  border-radius: 6px !important;
+}
+
+.listItem-active .listItemBodyText,
+.listItem-active a,
+.nowPlayingIndicator {
+  color: var(--player-teal) !important;
+  font-weight: 600;
+  text-shadow: none !important;
+}
+
+.nowPlayingPage {
+  background: radial-gradient(circle at 50% 30%, var(--accent-soft), var(--bg-base) 70%) !important;
+}
+
+.nowPlayingPageImage {
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.65) !important;
+}
+
+.MuiLinearProgress-bar,
+.itemProgressBarForeground {
+  background: var(--accent) !important;
+}
+
+.MuiLinearProgress-root,
+.itemProgressBar {
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* ---------- 9. Buttons, toolbars, inputs, dialogs & scrollbars ---------- */
+.emby-button.raised,
+.button-submit,
+.detailButton,
+.btnPlay,
+.MuiButton-contained,
+.MuiButton-outlined {
+  border-radius: 999px !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  border: 1px solid var(--border-subtle) !important;
+  box-shadow: none !important;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.emby-button.raised,
+.detailButton,
+.MuiButton-outlined {
+  background: var(--surface-hover) !important;
+  color: #ffffff !important;
+}
+
+.button-submit,
+.btnPlay.detailButton,
+.MuiButton-containedPrimary {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+.emby-button:active,
+.detailButton:active {
+  transform: scale(0.97);
+}
+
+.MuiButtonGroup-root,
+.MuiToggleButtonGroup-root {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px !important;
+}
+
+.MuiButtonGroup-grouped,
+.MuiToggleButtonGroup-grouped {
+  margin-left: 0 !important;
+  border-radius: 999px !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+.MuiButtonGroup-root .MuiButton-contained:first-child {
+  background: var(--accent-soft) !important;
+  border-color: var(--accent-soft) !important;
+  color: #ffffff !important;
+  padding: 6px 18px !important;
+}
+
+.MuiButtonGroup-root .MuiButton-contained:not(:first-child),
+.MuiToggleButton-root {
+  background: rgba(255, 255, 255, 0.07) !important;
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  color: var(--text-primary) !important;
+  transition: background-color 0.18s ease, transform 0.15s ease !important;
+}
+
+.MuiToggleButton-root,
+.MuiButtonGroup-root .MuiButton-outlined {
+  min-width: 36px !important;
+  height: 36px !important;
+  padding: 6px !important;
+}
+
+.MuiToggleButton-root.Mui-selected {
+  background: var(--accent-soft) !important;
+  border-color: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+.emby-input,
+.emby-select,
+.emby-textarea,
+.MuiOutlinedInput-root,
+.MuiFilledInput-root {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-sm) !important;
+  color: #ffffff !important;
+}
+
+.emby-input:focus,
+.emby-select:focus,
+.MuiOutlinedInput-root.Mui-focused {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px var(--accent-soft) !important;
+}
+
+.MuiOutlinedInput-notchedOutline,
+.MuiFilledInput-root::before,
+.MuiFilledInput-root::after {
+  border: 0 !important;
+}
+
+.dialog,
+.MuiDialog-paper,
+.videoOsdBottom,
+.toast {
+  background-color: var(--surface-elevated) !important;
+  -webkit-backdrop-filter: var(--blur) !important;
+  backdrop-filter: var(--blur) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55) !important;
+}
+
+.videoOsdBottom {
+  margin: 0 16px 14px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------- 10. Floating pill player ---------- */
+.appfooter {
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+}
+
+.nowPlayingBar {
+  pointer-events: auto !important;
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  margin: 0 auto var(--pill-gap) !important;
+  width: min(720px, calc(100vw - 24px)) !important;
+  padding: 8px 20px 14px !important;
+  border-radius: 999px !important;
+  background: rgba(34, 38, 46, 0.58) !important;
+  -webkit-backdrop-filter: var(--pill-blur) !important;
+  backdrop-filter: var(--pill-blur) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55) !important;
+  overflow: hidden !important;
+}
+
+.nowPlayingBarTop {
+  position: relative !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  width: 100% !important;
+  min-height: 42px !important;
+  background: transparent !important;
+  z-index: 10 !important;
+  pointer-events: auto !important;
+}
+
+/* Left: artwork and title */
+.nowPlayingBarInfoContainer {
+  position: relative !important;
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  background: transparent !important;
+}
+
+.nowPlayingImage {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.nowPlayingBarText {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.nowPlayingBarText > div {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: 13px !important;
+  line-height: 1.3 !important;
+}
+
+.nowPlayingBarText > div:last-child {
+  font-size: 11.5px !important;
+  opacity: 0.72 !important;
+}
+
+/* Center: previous, play/pause, next */
+.nowPlayingBarCenter {
+  position: relative !important;
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: transparent !important;
+  z-index: 10 !important;
+}
+
+.nowPlayingBar .previousTrackButton,
+.nowPlayingBar .btnPreviousTrack,
+.nowPlayingBar .nextTrackButton,
+.nowPlayingBar .btnNextTrack {
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.nowPlayingBar .previousTrackButton .material-icons,
+.nowPlayingBar .btnPreviousTrack .material-icons,
+.nowPlayingBar .nextTrackButton .material-icons,
+.nowPlayingBar .btnNextTrack .material-icons {
+  font-size: 20px !important;
+}
+
+.nowPlayingBar button.playPauseButton,
+.nowPlayingBar button.btnPlayPause {
+  background: radial-gradient(circle at 30% 30%, #19bdf7, #008ec2) !important;
+  color: #ffffff !important;
+  border-radius: 50% !important;
+  width: 38px !important;
+  height: 38px !important;
+  min-width: 38px !important;
+  padding: 0 !important;
+  margin: 0 4px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 0 14px rgba(0, 164, 220, 0.75) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  z-index: 10 !important;
+  pointer-events: auto !important;
+}
+
+.nowPlayingBar button.playPauseButton .material-icons,
+.nowPlayingBar button.btnPlayPause .material-icons {
+  color: #ffffff !important;
+  font-size: 22px !important;
+}
+
+/* Right: shuffle, repeat, heart, volume, queue */
+.nowPlayingBarRight {
+  position: relative !important;
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 2px !important;
+  background: transparent !important;
+}
+
+/* Hidden: stop, timestamp, and the extra play/pause copies.
+   The last-button rule also hides the queue button; the injector script
+   sets an inline display on that button, which overrides this. */
+.nowPlayingBar .stopButton,
+.nowPlayingBar .btnStop,
+.nowPlayingBarCurrentTime,
+.nowPlayingBar .nowPlayingBarRight button.playPauseButton,
+.nowPlayingBar .nowPlayingBarRight button.btnPlayPause,
+.nowPlayingBarRight > button:last-child:not(.toggleRepeatButton):not(.repeatButton):not(.btnRepeat):not(.toggleShuffleButton):not(.shuffleButton):not(.btnShuffle) {
+  display: none !important;
+}
+
+.nowPlayingBar [class*="shuffle" i],
+.nowPlayingBar .toggleShuffleButton,
+.nowPlayingBar .shuffleButton,
+.nowPlayingBar .btnShuffle {
+  order: 1 !important;
+}
+
+.nowPlayingBar .toggleRepeatButton,
+.nowPlayingBar .repeatButton,
+.nowPlayingBar .btnRepeat {
+  order: 2 !important;
+}
+
+.nowPlayingBarUserDataButtons {
+  order: 3 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.nowPlayingBar .muteButton,
+.nowPlayingBar .btnMute {
+  order: 4 !important;
+}
+
+.nowPlayingBarVolumeSliderContainer {
+  order: 5 !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 64px !important;
+  min-width: 64px !important;
+  margin: 0 2px 0 0 !important;
+}
+
+.nowPlayingBarRight [data-queue-mark] {
+  order: 6 !important;
+  margin: 0 !important;
+}
+
+.nowPlayingBarRight button,
+.nowPlayingBarRight .paper-icon-button-light,
+.nowPlayingBar [class*="shuffle" i] {
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  max-width: 26px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.nowPlayingBarRight button .material-icons,
+.nowPlayingBarRight .paper-icon-button-light .material-icons,
+.nowPlayingBar [class*="shuffle" i] .material-icons {
+  font-size: 16px !important;
+  width: 16px !important;
+  height: 16px !important;
+  line-height: 16px !important;
+}
+
+.nowPlayingBarRight button svg,
+.nowPlayingBar [class*="shuffle" i] svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.nowPlayingBar .buttonActive,
+.nowPlayingBar [aria-checked="true"],
+.nowPlayingBarUserDataButtons button.ratingbutton-active {
+  color: var(--player-teal) !important;
+}
+
+/* Progress bar sitting along the bottom edge */
+.nowPlayingBar .nowPlayingBarPositionContainer {
+  position: absolute !important;
+  inset: auto 28px 4px 28px !important;
+  transform: none !important;
+  height: 6px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  z-index: 1 !important;
+}
+
+.nowPlayingBar .mdl-slider-background-flex,
+.nowPlayingBar .mdl-slider__background-flex {
+  height: 4px !important;
+  border-radius: 999px !important;
+  overflow: hidden !important;
+  clip-path: inset(0 round 999px) !important;
+  -webkit-clip-path: inset(0 round 999px) !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.nowPlayingBar .mdl-slider-background-lower,
+.nowPlayingBar .mdl-slider__background-lower,
+.mdl-slider-background-lower {
+  background-color: var(--player-teal) !important;
+}
+
+.nowPlayingBar .mdl-slider-background-upper,
+.nowPlayingBar .mdl-slider__background-upper {
+  background: transparent !important;
+}
+
+.nowPlayingBar input.mdl-slider::-webkit-slider-thumb {
+  width: 11px !important;
+  height: 11px !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 0 6px rgba(0, 164, 220, 0.8) !important;
+  opacity: 0 !important;
+  transition: opacity 0.15s ease !important;
+}
+
+.nowPlayingBar input.mdl-slider:active::-webkit-slider-thumb {
+  opacity: 1 !important;
+}
+
+/* Hide slider hover bubbles */
+.sliderBubble,
+.sliderBubbleText,
+.nowPlayingBar .sliderBubble,
+.mdl-slider-popup,
+.mdl-slider__popup {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* ---------- 11. Queue panel & Now Playing page ---------- */
+/* Keep the pill visible while the queue page is open */
+body:has(.nowPlayingPage:not(.hide)) .nowPlayingBar.nowPlayingBar-hidden:has(.nowPlayingBarText:not(:empty)),
+body:has(.nowPlayingPage:not(.hide)) .nowPlayingBar:has(.nowPlayingBarText:not(:empty)) {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+  pointer-events: auto !important;
+  z-index: 9999 !important;
+}
+
+/* Hide the large now-playing card; the pill stays */
+.nowPlayingPage .nowPlayingInfoContainer,
+.nowPlayingPage .nowPlayingPageTop,
+.nowPlayingPage .nowPlayingPageControls {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+/* Queue as a panel on the right quarter, above the pill */
+.nowPlayingPage:not(.hide) {
+  position: fixed !important;
+  top: 64px !important;
+  right: 16px !important;
+  bottom: 110px !important;
+  left: auto !important;
+  width: 25vw !important;
+  min-width: 300px !important;
+  max-width: 480px !important;
+  height: auto !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  z-index: 1000 !important;
+  padding: 12px !important;
+  border-radius: 18px !important;
+  background: rgba(20, 20, 26, 0.6) !important;
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+.nowPlayingPage:not(.hide) * {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Glowing play button and teal highlights on the Now Playing page */
+.nowPlayingPage button.playPauseButton,
+.nowPlayingPage button.btnPlayPause {
+  background: radial-gradient(circle at 30% 30%, #19bdf7, #008ec2) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 0 14px rgba(0, 164, 220, 0.75) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.nowPlayingPage button.playPauseButton .material-icons,
+.nowPlayingPage button.btnPlayPause .material-icons {
+  color: #ffffff !important;
+}
+
+.nowPlayingPage .buttonActive,
+.nowPlayingPage [aria-checked="true"],
+.nowPlayingPage .ratingbutton-active {
+  color: var(--player-teal) !important;
+}
+
+.nowPlayingPage .mdl-slider-background-flex,
+.nowPlayingPage .mdl-slider__background-flex {
+  height: 4px !important;
+  border-radius: 999px !important;
+  overflow: hidden !important;
+  clip-path: inset(0 round 999px) !important;
+  -webkit-clip-path: inset(0 round 999px) !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.nowPlayingPage .mdl-slider-background-lower,
+.nowPlayingPage .mdl-slider__background-lower {
+  background-color: var(--player-teal) !important;
+}
+
+.nowPlayingPage input.mdl-slider::-webkit-slider-thumb {
+  background: #ffffff !important;
+  border: 2px solid var(--player-teal) !important;
+  box-shadow: 0 0 8px rgba(0, 164, 220, 0.8) !important;
+}
+
+/* Bottom clearance so the last items scroll above the pill */
+.page.withTabs .padded-bottom-page,
+.libraryPage .padded-bottom-page {
+  padding-bottom: 120px !important;
+}
+
+/* ---------- 12. Mobile phones (under 680px) ---------- */
+@media (max-width: 679px) {
+  /* Login card fills the width */
+  #loginPage .padded-left.padded-right.padded-bottom-page {
+    max-width: none !important;
+    width: calc(100% - 24px) !important;
+    margin: 12px !important;
+    padding: 1.5rem !important;
+  }
+
+  #loginPage h1 {
+    font-size: 1.6rem;
+  }
+
+  /* Drawer slides over the content at a comfortable width */
+  .mainDrawer,
+  .MuiDrawer-paper {
+    width: min(80vw, 300px) !important;
+  }
+
+  /* Pill spans the screen with safe-area spacing */
+  .nowPlayingBar {
+    width: calc(100vw - 16px) !important;
+    margin-bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+    padding: 7px 12px 12px !important;
+  }
+
+  .nowPlayingBarTop {
+    gap: 6px !important;
+  }
+
+  .nowPlayingBar .nowPlayingBarPositionContainer {
+    left: 14px !important;
+    right: 14px !important;
+    inset: auto 14px 4px 14px !important;
+  }
+
+  .nowPlayingBarText > div {
+    font-size: 12.5px !important;
+  }
+
+  /* Volume and mute go; the queue button stays */
+  .nowPlayingBar .muteButton,
+  .nowPlayingBar .btnMute,
+  .nowPlayingBarVolumeSliderContainer {
+    display: none !important;
+  }
+
+  .nowPlayingBar [data-queue-mark] {
+    display: inline-flex !important;
+  }
+
+  /* Queue panel fills the width above the pill */
+  .nowPlayingPage:not(.hide) {
+    top: calc(56px + env(safe-area-inset-top, 0px)) !important;
+    left: 8px !important;
+    right: 8px !important;
+    bottom: calc(100px + env(safe-area-inset-bottom, 0px)) !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  .itemName {
+    font-size: clamp(1.4rem, 6vw, 2rem);
+  }
+
+  .cardText {
+    font-size: 0.9em;
+  }
+}
+
+/* Very narrow phones: drop shuffle and repeat to make room */
+@media (max-width: 400px) {
+  .nowPlayingBar [class*="shuffle" i],
+  .nowPlayingBar .toggleShuffleButton,
+  .nowPlayingBar .btnShuffle,
+  .nowPlayingBar .toggleRepeatButton,
+  .nowPlayingBar .btnRepeat {
+    display: none !important;
+  }
+}
+
+/* ---------- 13. Touch screens ---------- */
+@media (pointer: coarse) {
+  /* Larger tap targets */
+  .nowPlayingBarRight button,
+  .nowPlayingBarRight .paper-icon-button-light,
+  .nowPlayingBar [class*="shuffle" i] {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    max-width: 34px !important;
+  }
+
+  .nowPlayingBar button.playPauseButton,
+  .nowPlayingBar button.btnPlayPause {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+  }
+
+  .nowPlayingBar .previousTrackButton,
+  .nowPlayingBar .btnPreviousTrack,
+  .nowPlayingBar .nextTrackButton,
+  .nowPlayingBar .btnNextTrack {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+  }
+
+  .listItem {
+    padding: 0.7rem 0.9rem !important;
+  }
+
+  /* 16px text stops iOS from zooming when an input is tapped */
+  .emby-input,
+  .emby-select,
+  .emby-textarea,
+  input {
+    font-size: 16px !important;
+  }
+}
+
+/* ---------- 14. Mouse-only hover effects ---------- */
+@media (hover: hover) {
+  .card:hover .cardScalable {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+  }
+
+  .cardOverlayFab-primary:hover {
+    background: var(--accent-soft) !important;
+    border-color: rgba(255, 255, 255, 0.32) !important;
+    transform: scale(1.08);
+  }
+
+  .cardOverlayButton-br .cardOverlayButton:hover {
+    background: rgba(255, 255, 255, 0.22) !important;
+    transform: scale(1.08);
+  }
+
+  .listItem:hover {
+    background: var(--surface-hover) !important;
+  }
+
+  .nowPlayingBar button.playPauseButton:hover,
+  .nowPlayingBar button.btnPlayPause:hover,
+  .nowPlayingPage button.playPauseButton:hover,
+  .nowPlayingPage button.btnPlayPause:hover {
+    transform: scale(1.06) !important;
+    box-shadow: 0 0 18px rgba(0, 164, 220, 0.95) !important;
+  }
+}
