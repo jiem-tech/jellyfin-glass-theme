@@ -1020,3 +1020,105 @@ a:not(.MuiButtonBase-root):not(.cardImageContainer),
     box-shadow: 0 0 18px rgba(0, 164, 220, 0.95) !important;
   }
 }
+
+/* ===== Mobile overrides (phones, under 680px) ===== */
+@media (max-width: 679px) {
+
+  /* Pill fits the screen. border-box stops the padding from pushing it off the edge */
+  body .nowPlayingBar {
+    box-sizing: border-box !important;
+    width: calc(100vw - 16px) !important;
+    max-width: calc(100vw - 16px) !important;
+    margin: 0 8px calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+    padding: 7px 12px 12px !important;
+    overflow: hidden !important;
+  }
+
+  body .nowPlayingBarTop {
+    gap: 8px !important;
+    min-width: 0 !important;
+  }
+
+  /* Smaller controls so everything fits */
+  body .nowPlayingBarRight button,
+  body .nowPlayingBarRight .paper-icon-button-light {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+  }
+
+  body .nowPlayingBar button.playPauseButton,
+  body .nowPlayingBar button.btnPlayPause {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+  }
+
+  body .nowPlayingBar .previousTrackButton,
+  body .nowPlayingBar .btnPreviousTrack,
+  body .nowPlayingBar .nextTrackButton,
+  body .nowPlayingBar .btnNextTrack {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+  }
+
+  /* Shuffle and repeat are hidden on phones so the queue button stays visible */
+  body .nowPlayingBar [class*="shuffle" i],
+  body .nowPlayingBar .toggleRepeatButton,
+  body .nowPlayingBar .repeatButton,
+  body .nowPlayingBar .btnRepeat {
+    display: none !important;
+  }
+
+  body .nowPlayingBar [data-queue-mark] {
+    display: inline-flex !important;
+    order: 6 !important;
+    margin: 0 !important;
+  }
+
+  /* Progress bar stays inside the pill's rounded edges */
+  body .nowPlayingBar .nowPlayingBarPositionContainer {
+    left: 14px !important;
+    right: 14px !important;
+    inset: auto 14px 4px 14px !important;
+  }
+
+  /* Page content clears the floating pill */
+  body .mainAnimatedPage,
+  body .itemDetailPage,
+  body .libraryPage,
+  body .page {
+    padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Queue page: default layout, no floating panel */
+  body .nowPlayingPage:not(.hide) {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    z-index: auto !important;
+    padding: 12px 0 120px !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  body .nowPlayingPage:not(.hide) .nowPlayingInfoContainer,
+  body .nowPlayingPage:not(.hide) .nowPlayingPageTop,
+  body .nowPlayingPage:not(.hide) .nowPlayingPageControls {
+    display: revert !important;
+    pointer-events: auto !important;
+  }
+}
