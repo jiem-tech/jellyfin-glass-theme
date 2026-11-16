@@ -817,53 +817,6 @@ a:not(.MuiButtonBase-root):not(.cardImageContainer),
 }
 
 /* ---------- 11. Queue panel & Now Playing page ---------- */
-/* Keep the pill visible while the queue page is open */
-body:has(.nowPlayingPage:not(.hide)) .nowPlayingBar.nowPlayingBar-hidden:has(.nowPlayingBarText:not(:empty)),
-body:has(.nowPlayingPage:not(.hide)) .nowPlayingBar:has(.nowPlayingBarText:not(:empty)) {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  transform: none !important;
-  pointer-events: auto !important;
-  z-index: 9999 !important;
-}
-
-/* Hide the large now-playing card; the pill stays */
-.nowPlayingPage .nowPlayingInfoContainer,
-.nowPlayingPage .nowPlayingPageTop,
-.nowPlayingPage .nowPlayingPageControls {
-  display: none !important;
-  pointer-events: none !important;
-}
-
-/* Queue as a panel on the right quarter, above the pill */
-.nowPlayingPage:not(.hide) {
-  position: fixed !important;
-  top: 64px !important;
-  right: 16px !important;
-  bottom: 110px !important;
-  left: auto !important;
-  width: 25vw !important;
-  min-width: 300px !important;
-  max-width: 480px !important;
-  height: auto !important;
-  box-sizing: border-box !important;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  z-index: 1000 !important;
-  padding: 12px !important;
-  border-radius: 18px !important;
-  background: rgba(20, 20, 26, 0.6) !important;
-  -webkit-backdrop-filter: var(--blur);
-  backdrop-filter: var(--blur);
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
-}
-
-.nowPlayingPage:not(.hide) * {
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-}
 
 /* Glowing play button and teal highlights on the Now Playing page */
 .nowPlayingPage button.playPauseButton,
