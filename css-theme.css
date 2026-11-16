@@ -1118,7 +1118,14 @@ a:not(.MuiButtonBase-root):not(.cardImageContainer),
   body .nowPlayingPage:not(.hide) .nowPlayingInfoContainer,
   body .nowPlayingPage:not(.hide) .nowPlayingPageTop,
   body .nowPlayingPage:not(.hide) .nowPlayingPageControls {
+     
     display: revert !important;
     pointer-events: auto !important;
   }
+}
+
+/* Hide the floating pill on the dashboard and plugin settings pages */
+html.hide-pill-dashboard .nowPlayingBar,
+html.hide-pill-dashboard .appfooter {
+  display: none !important;
 }
